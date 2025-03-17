@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
 
 // Define structure for languages
 interface LanguageDescriptor {
@@ -23,6 +23,7 @@ const LanguageSwitcher = () => {
 
   const [languageDropDown, setLanguageDropDown] = useState(false)
   const [language,setLanguage] = useState("English")
+  const languageDropdownRef = useRef<HTMLDivElement>(null);
 
   const handleDropdownToggle = (dropdownType: DropdownType) => (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -69,6 +70,19 @@ const LanguageSwitcher = () => {
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (languageDropdownRef.current && !languageDropdownRef.current.contains(event.target as Node)) {
+        setLanguageDropDown(false); // Close dropdown
+      }
+    };
+  
+    document.addEventListener('mousedown', handleClickOutside);
+  
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   
   
 
@@ -76,7 +90,7 @@ const LanguageSwitcher = () => {
     <div className='flex items-center gap-4'>
       <div className='flex gap-4 items-center'>
         {/* Language Dropdown */}
-        <div className='relative w-[120px] inline-block text-left  '>
+        <div ref={languageDropdownRef} className='relative w-[120px] inline-block text-left  '>
           <button
             className='flex justify-between cursor-pointer items-center w-full  px-4 py-2 gap-x-1.5 rounded-md bg-white text-sm font-semibold text-gray-900 mt-2'
             onClick={handleDropdownToggle('language')}

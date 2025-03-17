@@ -45,7 +45,7 @@ export default function LoginForm() {
 
           {/* Buttons */}
           <div className="flex space-x-4">
-            <Link href="/about" className="w-full"> 
+            <Link href="/subscription" className="w-full"> 
               <button
                 type="submit"
                 className=" bg-blue-500 cursor-pointer w-full hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300"
@@ -58,7 +58,7 @@ export default function LoginForm() {
                 type="button"
                 className=" bg-gray-200 w-full cursor-pointer py-2 px-4 hover:bg-gray-300 text-gray-700 font-bold rounded-lg transition-all duration-300"
               >
-                Register
+                Registrera
               </button>
             </Link>
           </div>
